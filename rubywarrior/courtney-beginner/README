@@ -1,18 +1,31 @@
-Level 1
+Level 3
 
-You see before yourself a long hallway with stairs at the end. There is nothing in the way.
+The air feels thicker than before. There must be a horde of sludge.
 
-Tip: Call warrior.walk! to walk forward in the Player 'play_turn' method.
+Tip: Be careful not to die! Use warrior.health to keep an eye on your health, and warrior.rest! to earn 10% of max health back.
 
- --------
-|@      >|
- --------
+ ---------
+|@ s ss s>|
+ ---------
 
   > = Stairs
   @ = Courtney (20 HP)
+  s = Sludge (12 HP)
 
 
 Warrior Abilities:
+
+  warrior.health
+    Returns an integer representing your health.
+
+  warrior.rest!
+    Gain 10% of max health back, but do nothing more.
+
+  warrior.feel
+    Returns a Space for the given direction (forward by default).
+
+  warrior.attack!
+    Attacks a unit in given direction (forward by default).
 
   warrior.walk!
     Move in the given direction (forward by default).
