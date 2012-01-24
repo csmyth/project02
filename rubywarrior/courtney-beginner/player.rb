@@ -11,6 +11,8 @@ class Player
 		else
 			warrior.walk!
 		end
+	elsif warrior.feel.captive?
+		warrior.rescue!
 	else
 		warrior.attack!
 	end
