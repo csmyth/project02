@@ -20,7 +20,9 @@ class Player
 	end
 	
 	#Conditional Actions	
-	if warrior.feel(:backward).wall? && @need_rest
+	if warrior.feel.wall?
+		warrior.pivot!
+	elsif warrior.feel(:backward).wall? && @need_rest
 		if warrior.health < MaxHealth
 			warrior.rest!
 		else 
