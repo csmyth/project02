@@ -1,3 +1,7 @@
+#Set constants
+MaxHealth = 20
+HealthThreshold = 10
+
 class Player
   def play_turn(warrior)
 	#Initialize instance variables
@@ -9,18 +13,15 @@ class Player
 	end
 	
 	#Senses Evaluation
-	if warrior.feel(:backward).wall?
-		@wall_found = true
-	end
 	if warrior.feel.empty? && warrior.health < @prev_health
 		@close_enemy = false
 	else
 		@close_enemy = true
 	end
 	
-	#Conditional Actions
-	if @need_rest
-		if warrior.health < 20
+	#Conditional Actions	
+	if warrior.feel(:backward).wall? && @need_rest
+		if warrior.health < MaxHealth
 			warrior.rest!
 		else 
 			@need_rest = false
@@ -40,12 +41,13 @@ class Player
 	
 	elsif !(@close_enemy)
 		warrior.walk!
-	elsif @close_enemy && warrior.health < 15
+	elsif @close_enemy && warrior.health < HealthThreshold
 		@need_rest = true
+		@wall_found = false
 		warrior.walk!(:backward)
 	
 	elsif warrior.feel.empty?
-		if warrior.health < 20
+		if warrior.health < MaxHealth
 			warrior.rest!
 		else
 			warrior.walk!
@@ -56,5 +58,9 @@ class Player
 	
 	#Record health
 	@prev_health = warrior.health
+	
+	if warrior.feel(:backward).wall?
+		@wall_found = true
+	end
   end
 end
